@@ -1,11 +1,12 @@
 function [L, U] = lu_razcep(A)
-    L = zeros(size(A));
-    U = zeros(size(A));
+    U = A;
+    L = eye(size(A));
+    n = size(A, 1);
     for i = 1:n - 1
         for j = i + 1:n
-            L(j,i) = A(j,i) / A(i,i);
-            for k = i + 1:n
-                U(j,k) = A(j,k) - L(j,i) * A(i,k);
+            L(j,i) = U(j,i) / U(i,i);
+            for k = i:n
+                U(j,k) = U(j,k) - L(j,i) * U(i,k);
             end
         end
     end
